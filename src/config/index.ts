@@ -8,7 +8,12 @@ dotenv.config({
 const config = {
   PORT: process.env.PORT || 8000, //port
   NODE_ENV: process.env.NODE_ENV, //node environment
-  WHITELIST_ORIGIN: process.env.ALLOWED_DOMAIN?.split(',') || '', //allowed domain for CORS
+  //allowed domain for CORS
+  WHITELIST_ORIGIN: (process.env.ALLOWED_DOMAIN || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+ 
 };
 
 export default config;
